@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <title>넷챠빙 1. 틀 2. DB생성 3. 서버-클라이언트 연결 </title>
+
+    <style type="text/css">
+    .search_section{
+        /* background-color: lightgreen; */
+    }
+    .wrapall{
+        display: table; 
+        margin-left: auto; 
+        margin-right: auto;
+        /* display: inline-block; */
+        padding: 50px;
+        /* background-color: lightgrey; */
+    }
+
+    .search_section{
+        width: 500px;
+        align-content: center;
+    }
+
+    .membership_table{
+        width: 1000px;
+        text-align: center;
+        /* background-color: cornflowerblue; */
+    }
+    .result_table{
+        width: 1000px;
+        text-align: center;
+        /* background-color: darkkhaki; */
+    }
+
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            alert('roading - - - !')
+        });
+
+
+
+
+
+
+
+
+
+    </script>
+
+</head>
+
+
+
+
+
+<body>
+    <div class="wholewraping wrapall">
+        <!-- 프로젝트명 -->
+        <h1>넷<span style="font-size: small;">플릭스 왓</span>챠<span style="font-size: small;">플레이 티</span>빙</h1><br>
+        <!-- 검색어 입력창 -->
+        <div class="search search_section">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="검색어를 입력하세요 !!" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn btn-outline-dark findbtn" type="button"> 찾아보기 FIND </button>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <!-- 하단부 -->
+        <div class="search_result newwrap">
+            <!-- 멤버쉽 내역창 -->
+            <table class="table membership_table">
+                <thead class="thead-dark">
+                    <tr>
+                    <th rowspan='1' scope="col" style="width: 10%;">멤버쉽</th>  
+                    <th colspan='3' scope="col" style="width: 30%;">넷플릭스</th>
+                    <th colspan='3' scope="col" style="width: 30%;">왓챠플레이</th>
+                    <th colspan='3' scope="col" style="width: 30%;">티빙</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row" style="width: 10%;">등  급</th>
+            
+                    <td style="width: 10%;">베이식</td>
+                    <td style="width: 10%;">스탠다드</td>
+                    <td style="width: 10%;">프리미엄</td>
+            
+                    <td style="width: 10%;">베이직</td>
+                    <td style="width: 10%;"> - </td>
+                    <td style="width: 10%;">프리미엄</td>
+            
+                    <td style="width: 10%;">티빙<br>무제한</td>
+                    <td style="width: 10%;">무제한<br>플러스</td>
+                    <td style="width: 10%;">무비<br>프리미엄</td>
+                    <tr>
+                    <th scope="row">금  액</th>
+            
+                    <td>9,500원</td>
+                    <td>12,000원</td>
+                    <td>14,500원</td>
+            
+                    <td>7,900원</td>
+                    <td>  -  </td>
+                    <td>12,900원</td>
+            
+                    <td>5,900원</td>
+                    <td>9,900원</td>
+                    <td>9,900원</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">화  질</th>
+            
+                    <td>720p</td>
+                    <td>1080p</td>
+                    <td>4K</td>
+            
+                    <td>1080p</td>
+                    <td>  -  </td>
+                    <td>4K</td>
+            
+                    <td>720p</td>
+                    <td>1080p</td>
+                    <td>1080p</td>
+                    </tr>
+                </tbody>          
+            </table>
+            <!-- 검색결과란 -->
+            <table class="table result_table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col" style="width: 10%;">검색결과</th>
+                        <th scope="col" style="width: 30%;">Netflix</th>
+                        <th scope="col" style="width: 30%;">Whacha play</th>
+                        <th scope="col" style="width: 30%;">Tving</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1 검색량</th>
+                        <td>(...)개의<br>검색결과</td>
+                        <td>(...)개의<br>검색결과</td>
+                        <td>(...)개의<br>검색결과</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2 검색결과 나타내기</th>
+                        <td>
+                            <div class="card" style="width: 240px;">
+                                <img class="card-img-top" src="https://i.pinimg.com/236x/32/47/4e/32474e16f47f150411853d4264d2a7c3.jpg" alt="콘텐츠 이미지">
+                                <div class="card-body">
+                                <h5 class="card-title">라라랜드</h5>
+                                <p class="card-text cast">출연 : 엠마스톤, 라이언 고슬링 등</p>
+                                <a href="#" class="btn btn-primary btn_netflix">바로가기</a>
+                                </div>
+                            </div>              
+                        </td>
+                        <td>
+                            <div class="card" style="width: 240px;">
+                                <img class="card-img-top" src="https://i.pinimg.com/236x/32/47/4e/32474e16f47f150411853d4264d2a7c3.jpg" alt="콘텐츠 이미지">
+                                <div class="card-body">
+                                <h5 class="card-title">라라랜드</h5>
+                                <p class="card-text cast">출연 : 엠마스톤, 라이언 고슬링 등</p>
+                                <a href="#" class="btn btn-primary btn_whacha">바로가기</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="card" style="width: 240px;">
+                                <img class="card-img-top" src="https://i.pinimg.com/236x/32/47/4e/32474e16f47f150411853d4264d2a7c3.jpg" alt="콘텐츠 이미지">
+                                <div class="card-body">
+                                <h5 class="card-title">라라랜드</h5>
+                                <p class="card-text cast">출연 : 엠마스톤, 라이언 고슬링 등</p>
+                                <a href="#" class="btn btn-primary btn_tving">바로가기</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">etc</th>
+                        <td>넷플</td>
+                        <td>왓챠</td>
+                        <td>티빙</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
