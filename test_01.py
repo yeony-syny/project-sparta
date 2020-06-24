@@ -57,60 +57,63 @@ while True:
 
 soup = BeautifulSoup(driver.page_source, 'html.parser')
 
+# DB에 타이틀, 스틸컷 url 저장하기
+for i in range(0,3):
+    for j in range(0, 4):
 
-# 반복문
+        titleA = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
 
-# for i in range(0,375, 1):
+        imgA = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img').text
+
+        urlA = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a').text
+
+
+        # title 셀렉터
+        #title-card-374-1 > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p
+        # img url 셀렉터
+        #title-card-374-1 > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img
+        # 바로가기 url 셀렉터
+        #title-card-374-1 > div.ptrack-content > a
+  
+
+        print(titleA, imgA, urlA)
+
+        # groupA = {'title':titlesA, 'img':imgA, 'url':urlA}
+        # db.tvprogram.insert_one(groupA)
+
+
+
+
+
+
+
+# for i in range(100,200):
 #     for j in range(0, 4):
 
-#         titles = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
+#         titlesB = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
+#         # print(titlesB)
+
+#         groupB = {'title':titlesB}
+#         db.tvprogram.insert_one(groupB)
 
 
-# imgurlsA = soup.select_one('#title-card-0-1 > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img')
-# src = imgurlsA
-# print(imgurlsA, src)
+# for i in range(200,300):
+#     for j in range(0, 4):
 
+#         titlesC = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
+#         # print(titlesC)
 
+#         groupC = {'title':titlesB}
+#         db.tvprogram.insert_one(groupC)
 
-for i in range(0,100):
-    for j in range(0, 4):
+# for i in range(300,375):
+#     for j in range(0, 4):
 
-        titlesA = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
-        print(titlesA)
+#         titlesD = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
+#         print(titlesD)
 
-        # imgurlsA = soup.select_one('#title-card-0-0 > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img[src]').text
-        # linksA = soup.select_one('')  , 'imgurl':imgurlsA, 'link':linksA
-        groupA = {'title':titlesA}
-        db.tvprogram.insert_one(groupA)
-
-
-for i in range(100,200):
-    for j in range(0, 4):
-
-        titlesB = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
-        # print(titlesB)
-
-        groupB = {'title':titlesB}
-        db.tvprogram.insert_one(groupB)
-
-
-for i in range(200,300):
-    for j in range(0, 4):
-
-        titlesC = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
-        # print(titlesC)
-
-        groupC = {'title':titlesB}
-        db.tvprogram.insert_one(groupC)
-
-for i in range(300,375):
-    for j in range(0, 4):
-
-        titlesD = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
-        print(titlesD)
-
-        groupD = {'title':titlesD}
-        db.tvprogram.insert_one(groupD)
+#         groupD = {'title':titlesD}
+#         db.tvprogram.insert_one(groupD)
 
         print(">>>>>>>>>>>>> D B 저 장 완 료 ! ! ! !")
 
