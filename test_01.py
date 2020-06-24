@@ -34,25 +34,25 @@ driver.get('https://www.netflix.com/browse/genre/83?so=az')
 
 # time.sleep(2)
 
-# # 무한스크롤 =====================================================================
-# SCROLL_PAUSE_TIME = 0.5
+# 무한스크롤 =====================================================================
+SCROLL_PAUSE_TIME = 0.5
 
-# # Get scroll height
-# last_height = driver.execute_script("return document.body.scrollHeight")
+# Get scroll height
+last_height = driver.execute_script("return document.body.scrollHeight")
 
-# while True:
-#     # Scroll down to bottom
-#     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+while True:
+    # Scroll down to bottom
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-#     # Wait to load page
-#     time.sleep(SCROLL_PAUSE_TIME)
+    # Wait to load page
+    time.sleep(SCROLL_PAUSE_TIME)
 
-#     # Calculate new scroll height and compare with last scroll height
-#     new_height = driver.execute_script("return document.body.scrollHeight")
-#     if new_height == last_height:
-#         break
-#     last_height = new_height
-# # =========================================================================
+    # Calculate new scroll height and compare with last scroll height
+    new_height = driver.execute_script("return document.body.scrollHeight")
+    if new_height == last_height:
+        break
+    last_height = new_height
+# =========================================================================
 
 
 soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -66,60 +66,53 @@ soup = BeautifulSoup(driver.page_source, 'html.parser')
 #         titles = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
 
 
-imgurlsA = soup.select_one('#title-card-0-0 > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img[src]')
-print(imgurlsA)
+# imgurlsA = soup.select_one('#title-card-0-1 > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img')
+# src = imgurlsA
+# print(imgurlsA, src)
 
 
 
-# for i in range(0,100):
-#     for j in range(0, 4):
+for i in range(0,100):
+    for j in range(0, 4):
 
-#         titlesA = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
-#         # print(titlesA)
+        titlesA = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
+        print(titlesA)
 
-#         imgurlsA = soup.select_one('#title-card-0-0 > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img[src]').text
-
-#         linksA = soup.select_one('')
-
-
-        # groupA = {'title':titlesA, 'imgurl':imgurlsA, 'link':linksA}
-        # db.tvprogram.insert_one(groupA)
+        # imgurlsA = soup.select_one('#title-card-0-0 > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img[src]').text
+        # linksA = soup.select_one('')  , 'imgurl':imgurlsA, 'link':linksA
+        groupA = {'title':titlesA}
+        db.tvprogram.insert_one(groupA)
 
 
+for i in range(100,200):
+    for j in range(0, 4):
+
+        titlesB = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
+        # print(titlesB)
+
+        groupB = {'title':titlesB}
+        db.tvprogram.insert_one(groupB)
 
 
+for i in range(200,300):
+    for j in range(0, 4):
 
+        titlesC = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
+        # print(titlesC)
 
+        groupC = {'title':titlesB}
+        db.tvprogram.insert_one(groupC)
 
+for i in range(300,375):
+    for j in range(0, 4):
 
+        titlesD = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
+        print(titlesD)
 
+        groupD = {'title':titlesD}
+        db.tvprogram.insert_one(groupD)
 
-
-
-
-
-
-# for i in range(100,200):
-#     for j in range(0, 4):
-
-#         titlesB = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
-
-#         print(titlesB)
-
-# for i in range(200,300):
-#     for j in range(0, 4):
-
-#         titlesC = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
-
-#         print(titlesC)
-
-# for i in range(300,375):
-#     for j in range(0, 4):
-
-#         titlesD = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
-
-#         print(titlesD)
-
+        print(">>>>>>>>>>>>> D B 저 장 완 료 ! ! ! !")
 
 
 # 크롬 종료
