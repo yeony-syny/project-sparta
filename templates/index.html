@@ -17,7 +17,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <title>넷챠빙 1. 틀 2. DB생성 3. 서버-클라이언트 연결 </title>
+    <title>3. 서버-클라이언트 연결 </title>
 
     <style type="text/css">
     .search_section{
@@ -52,28 +52,64 @@
 
     <script>
         $(document).ready(function() {
-                       
-            alert('roading - - - !')
+            show_search();
+            // alert('roading - - - !')
         });
 
-        function search_give() {
-            
-
+        function find_btn(){
+            alert("찾아보기 버튼 클릭!");
         }
 
-        function serch_btn() {
-            findbtn
+        function show_search() {
+            $('#netflixcard').empty()
+
+		    $.ajax({
+			    type: 'GET',
+			    url:  '/search',
+			    data: {},
+			    success: function (response) {
+                    // if (response['result'] == 'success')
+
+                    let tvpros = response['search_list']
+                    for (let i = 0; i < tvpros.length; i++) {
+                        let tvpro = tvpros[i];
+
+                        let title = tvpro['title']
+                        let img = tvpro['img']
+                        let url = tvpro['url']
+
+                        let temp_html = `<div class="card" style="width: 240px;">
+                                            <img class="card-img-top" src="${img}" alt="콘텐츠 이미지">
+                                            <div class="card-body">
+                                            <h5 class="card-title">${title}</h5>
+                                            <p class="card-text cast">..</p>
+                                            <a href="#" class="btn btn-primary btn_netflix">바로가기</a>
+                                            </div>
+                                        </div>`
+
+                        $('#netflixcard').append(temp_html)
+                    }
+                        // let msg = response['msg'];
+					    // alert(msg);
+			    }
+		    });
+		}
+
+        function search_post() {
+            $.ajax({
+	            type: 'POST',
+	            url:  '/search',
+	            data: { 'title_give':title },
+	            success: function (response) {
+                    if (response['result'] == 'success') {
+                        let msg = response['msg'];
+                        alert(msg);
+
+                        window.location.reload()
+                    }
+                }
+            });
         }
-            
-
-        function show_result () {
-
-        }
-
-
-
-
-
 
 
 
@@ -81,20 +117,18 @@
 
 </head>
 
-
-
-
-
 <body>
     <div class="wholewraping wrapall">
         <!-- 프로젝트명 -->
-        <h1>넷<span style="font-size: small;">플릭스 왓</span>챠<span style="font-size: small;">플레이 티</span>빙</h1><br>
+        <h1 class="maintitle">넷<span style="font-size: small;">플릭스 왓</span>챠<span style="font-size: small;">플레이 티</span>빙</h1><br>
+
+
         <!-- 검색어 입력창 -->
         <div class="search search_section">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="검색어를 입력하세요 !!" aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn btn-outline-dark findbtn" type="button"> 찾아보기 FIND </button>
+                    <button onclick="find_btn();" class="btn btn-outline-dark findbtn" type="button"> 찾아보기 FIND </button>
                 </div>
             </div>
         </div>
@@ -178,7 +212,7 @@
                     <tr>
                         <th scope="row">2 검색결과 나타내기</th>
                         <td>
-                            <div class="card" style="width: 240px;">
+                            <div class="card" id="netflixcard" style="width: 240px;">
                                 <img class="card-img-top" src="https://i.pinimg.com/236x/32/47/4e/32474e16f47f150411853d4264d2a7c3.jpg" alt="콘텐츠 이미지">
                                 <div class="card-body">
                                 <h5 class="card-title">라라랜드</h5>
@@ -189,20 +223,20 @@
                         </td>
                         <td>
                             <div class="card" style="width: 240px;">
-                                <img class="card-img-top" src="https://i.pinimg.com/236x/32/47/4e/32474e16f47f150411853d4264d2a7c3.jpg" alt="콘텐츠 이미지">
+                                <img class="card-img-top" src="https://image-cdn.hypb.st/https%3A%2F%2Fkr.hypebeast.com%2Ffiles%2F2020%2F04%2Fwatcha-play-original-series-plan-1-1.jpg?q=75&w=750&cbr=1&fit=max" alt="콘텐츠 이미지">
                                 <div class="card-body">
-                                <h5 class="card-title">라라랜드</h5>
-                                <p class="card-text cast">출연 : 엠마스톤, 라이언 고슬링 등</p>
+                                <h5 class="card-title">결과 없음</h5>
+                                <p class="card-text cast">..</p>
                                 <a href="#" class="btn btn-primary btn_whacha">바로가기</a>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <div class="card" style="width: 240px;">
-                                <img class="card-img-top" src="https://i.pinimg.com/236x/32/47/4e/32474e16f47f150411853d4264d2a7c3.jpg" alt="콘텐츠 이미지">
+                            <div class="card" style="width: 240px; ">
+                                <img class="card-img-top" src="https://m.cj.net/upfiles/editor/0000006252768003587583530.jpg" alt="콘텐츠 이미지">
                                 <div class="card-body">
-                                <h5 class="card-title">라라랜드</h5>
-                                <p class="card-text cast">출연 : 엠마스톤, 라이언 고슬링 등</p>
+                                <h5 class="card-title">결과 없음</h5>
+                                <p class="card-text cast">..</p>
                                 <a href="#" class="btn btn-primary btn_tving">바로가기</a>
                                 </div>
                             </div>
