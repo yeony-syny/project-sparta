@@ -5,9 +5,11 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-from pymongo import MongoClient           # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
+from pymongo import MongoClient  
+
+
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
-db = client.dbnetflix                   # 'dbsparta'라는 이름의 db를 만듭니다.
+db = client.dbnetflixTV                  
 
 usr = 'synyout@gmail.com'
 pwd = 'qlalf2424.'
@@ -52,70 +54,81 @@ while True:
     if new_height == last_height:
         break
     last_height = new_height
+
+# print('스크롤 완료 !')
 # =========================================================================
 
 
 soup = BeautifulSoup(driver.page_source, 'html.parser')
 
 # DB에 타이틀, 스틸컷 url 저장하기
-for i in range(0,3):
+for i in range(0,100):
     for j in range(0, 4):
 
         titleA = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
 
-        imgA = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img').text
+        imgA = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img')
 
-        urlA = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a').text
+        urlA = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a')
 
+        # print(titleA, imgA['src'], urlA['href'])  
 
-        # title 셀렉터
-        #title-card-374-1 > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p
-        # img url 셀렉터
-        #title-card-374-1 > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img
-        # 바로가기 url 셀렉터
-        #title-card-374-1 > div.ptrack-content > a
-  
+        groupA = {'title':titleA, 'img':imgA['src'], 'url':urlA['href']}
+        db.tvprogram.insert_one(groupA)
 
-        print(titleA, imgA, urlA)
-
-        # groupA = {'title':titlesA, 'img':imgA, 'url':urlA}
-        # db.tvprogram.insert_one(groupA)
+print('1-99번째 DB저장 완료')
 
 
+for i in range(100,200):
+    for j in range(0, 4):
+
+        titleB = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
+
+        imgB = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img')
+
+        urlB = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a')
+
+        # print(titleB, imgA['src'], urlB['href'])       
+        groupB = {'title':titleB, 'img':imgB['src'], 'url':urlB['href']}
+        db.tvprogram.insert_one(groupB)
+
+print('100-199번째 DB저장 완료')
 
 
+for i in range(200,300):
+    for j in range(0, 4):
+
+        titleC = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
+
+        imgC = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img')
+
+        urlC = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a')
+
+        # print(titleC, imgC['src'], urlC['href'])       
+        groupC = {'title':titleC, 'img':imgC['src'], 'url':urlC['href']}
+        db.tvprogram.insert_one(groupC)
+
+print('200-299번째 DB저장 완료')
 
 
+for i in range(300,375):
+    for j in range(0, 4):
 
-# for i in range(100,200):
-#     for j in range(0, 4):
+        titleD = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
 
-#         titlesB = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
-#         # print(titlesB)
+        imgD = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > img')
 
-#         groupB = {'title':titlesB}
-#         db.tvprogram.insert_one(groupB)
+        urlD = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a')
+
+        # print(titleD, imgD['src'], urlD['href'])
+
+        groupD = {'title':titleD, 'img':imgD['src'], 'url':urlD['href']}
+        db.tvprogram.insert_one(groupD)
+
+print('300-374번째 DB저장 완료')
 
 
-# for i in range(200,300):
-#     for j in range(0, 4):
-
-#         titlesC = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
-#         # print(titlesC)
-
-#         groupC = {'title':titlesB}
-#         db.tvprogram.insert_one(groupC)
-
-# for i in range(300,375):
-#     for j in range(0, 4):
-
-#         titlesD = soup.select_one('#title-card-'+ str(i) +'-'+ str(j) +' > div.ptrack-content > a > div.boxart-size-16x9.boxart-container > div > p').text
-#         print(titlesD)
-
-#         groupD = {'title':titlesD}
-#         db.tvprogram.insert_one(groupD)
-
-        print(">>>>>>>>>>>>> D B 저 장 완 료 ! ! ! !")
+print(">>>>>>>>>>>>> D B 저 장 완 료 ! ! ! !")
 
 
 # 크롬 종료

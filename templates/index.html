@@ -15,6 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <title>넷챠빙 1. 틀 2. DB생성 3. 서버-클라이언트 연결 </title>
 
@@ -36,12 +37,12 @@
         align-content: center;
     }
 
-    .membership_table{
+    .membership_box{
         width: 1000px;
         text-align: center;
         /* background-color: cornflowerblue; */
     }
-    .result_table{
+    .result_box{
         width: 1000px;
         text-align: center;
         /* background-color: darkkhaki; */
@@ -51,9 +52,23 @@
 
     <script>
         $(document).ready(function() {
+                       
             alert('roading - - - !')
         });
 
+        function search_give() {
+            
+
+        }
+
+        function serch_btn() {
+            findbtn
+        }
+            
+
+        function show_result () {
+
+        }
 
 
 
@@ -87,7 +102,7 @@
         <!-- 하단부 -->
         <div class="search_result newwrap">
             <!-- 멤버쉽 내역창 -->
-            <table class="table membership_table">
+            <table class="table membership_box">
                 <thead class="thead-dark">
                     <tr>
                     <th rowspan='1' scope="col" style="width: 10%;">멤버쉽</th>  
@@ -144,7 +159,7 @@
                 </tbody>          
             </table>
             <!-- 검색결과란 -->
-            <table class="table result_table">
+            <table class="table result_box">
                 <thead class="thead-light">
                     <tr>
                         <th scope="col" style="width: 10%;">검색결과</th>

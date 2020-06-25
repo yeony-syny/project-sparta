@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 from pymongo import MongoClient           # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
-db = client.dbnetchaving                   # 'dbsparta'라는 이름의 db를 만듭니다.
+db = client.dbnetflix                 # 'dbsparta'라는 이름의 db를 만듭니다.
 
 ## URL 별로 함수명이 같거나,
 ## route('/') 등의 주소가 같으면 안됩니다.
@@ -15,12 +15,6 @@ def home():
 
 #  API역할을 하는 부분
 @app.route('/member/netfilx', methods=['GET'])
-
-
-@app.route('/member/whacha', methods=['GET'])
-
-
-@app.route('/member/tiving', methods=['GET'])
 
 
 @app.route('/search', methods=['GET'])
