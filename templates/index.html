@@ -48,16 +48,8 @@
     </style>
 
     <script>
-        $(document).ready(function() {
-            // $('#netflixcard').empty();
-            // $('#whachacard').empty();
-            // $('#tvingcard').empty();            
 
-            // alert('roading - - - !')            
-        });
-        
-
-        function find_btn() {
+         function find_btn() {
             // 1. input 에서 title 가져오기
             let title = $('#search_wordform').val();
             console.log(title)
@@ -74,49 +66,63 @@
                 data: { title_give:title },
                 success: function (response) {
                     if (response['result'] == 'success') {
-                        
-                        alert(response['msg']);
-
-                        window.location.reload();
+                                                
+                        let correct_title = response['correct_title']
+                        console.log(correct_title) 
+                                               
+                        // window.location.reload();
                     }
                 }
             });
         }
-        
 
-        function show_result() {
+        $(document).ready(function() {            
+            $('#netflixcard').html('');
+            show_list();
+
+            // $('#netflixcard').empty();
+            // $('#whachacard').empty();
+            // alert('roading - - - !')            
+        });
+
+
+        function show_list() {
+            // 1. 카드구성 목록을 서버에 요청
+            // 2. 요청 성공 여부 확인
+            // 3. 요청 성공했을 때 카드를 구성하여 화면에 나타내기
+
 		    $.ajax({
 			    type: 'GET',
 			    url:  '/search',
 			    data: {},
 			    success: function (response) {
-
-                    if (response['result'] == 'success') {                        
-                        let tvpros = response['search_results'];
+                    if (response['result'] == 'success') {
                         
+                        let tvpros = response['sssresult'];
                         for (let i = 0; i < tvpros.length; i++) {
+
                             let tvpro = tvpros[i];
 
                             let title = tvpro['title']
                             let img = tvpro['img']
                             let url = tvpro['url']
 
-                            let temp_html = `<div class="card" style="width: 240px;">
+                            let temp_html = `<div class="card" style="width: 330px;">
                                                 <img class="card-img-top" src="${img}" alt="콘텐츠 이미지">
                                                 <div class="card-body">
                                                 <h5 class="card-title">${title}</h5>
-                                                <a href="#" class="btn btn-primary btn_netflix">바로가기</a>
+                                                <a href="https://www.netflix.com${url}" target="blank" class="btn btn-primary btn_netflix">바로가기</a>
                                                 </div>
                                             </div>`;
 
                             $('#netflixcard').append(temp_html);
                         }
+                    } else {
+                        alert('검색결과 존재하지 않습니다.');
                     }                            
 			    }
-		    });
+		    })
 		}
-
-
 
 
     </script>
@@ -126,7 +132,8 @@
 <body>
     <div class="wholewraping wrapall">
         <!-- 프로젝트명 -->
-        <h1 class="maintitle">넷<span style="font-size: small;">플릭스 왓</span>챠<span style="font-size: small;">플레이 티</span>빙</h1><br>
+        <h1 class="maintitle">넷플릭스 <span style="font-size: small;">   OR   </span>왓챠플레이</h1>
+        <span>내가 찾는 TV프로그램은 어디에 있을까</span><br><br>
 
 
         <!-- 검색어 입력창 -->
@@ -145,15 +152,14 @@
             <table class="table membership_box">
                 <thead class="thead-dark">
                     <tr>
-                    <th rowspan='1' scope="col" style="width: 10%;">멤버쉽</th>  
-                    <th colspan='3' scope="col" style="width: 30%;">넷플릭스</th>
-                    <th colspan='3' scope="col" style="width: 30%;">왓챠플레이</th>
-                    <th colspan='3' scope="col" style="width: 30%;">티빙</th>
+                    <th rowspan='1' scope="col" style="width: 20%;">멤버쉽</th>  
+                    <th colspan='3' scope="col" style="width: 40%;">넷플릭스</th>
+                    <th colspan='3' scope="col" style="width: 40%;">왓챠플레이</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                    <th scope="row" style="width: 10%;">등  급</th>
+                    <th scope="row" style="width: 20%;">등  급</th>
             
                     <td style="width: 10%;">베이식</td>
                     <td style="width: 10%;">스탠다드</td>
@@ -162,10 +168,8 @@
                     <td style="width: 10%;">베이직</td>
                     <td style="width: 10%;"> - </td>
                     <td style="width: 10%;">프리미엄</td>
-            
-                    <td style="width: 10%;">티빙<br>무제한</td>
-                    <td style="width: 10%;">무제한<br>플러스</td>
-                    <td style="width: 10%;">무비<br>프리미엄</td>
+                    </tr>
+
                     <tr>
                     <th scope="row">금  액</th>
             
@@ -176,11 +180,8 @@
                     <td>7,900원</td>
                     <td>  -  </td>
                     <td>12,900원</td>
-            
-                    <td>5,900원</td>
-                    <td>9,900원</td>
-                    <td>9,900원</td>
                     </tr>
+
                     <tr>
                     <th scope="row">화  질</th>
             
@@ -191,10 +192,6 @@
                     <td>1080p</td>
                     <td>  -  </td>
                     <td>4K</td>
-            
-                    <td>720p</td>
-                    <td>1080p</td>
-                    <td>1080p</td>
                     </tr>
                 </tbody>          
             </table>
@@ -202,23 +199,21 @@
             <table class="table result_box">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col" style="width: 10%;">검색결과</th>
-                        <th scope="col" style="width: 30%;">Netflix</th>
-                        <th scope="col" style="width: 30%;">Whacha play</th>
-                        <th scope="col" style="width: 30%;">Tving</th>
+                        <th scope="col" style="width: 20%;">검색결과</th>
+                        <th scope="col" style="width: 40%;">Netflix</th>
+                        <th scope="col" style="width: 40%;">Whacha play</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1 검색량</th>
-                        <td>(...)개의<br>검색결과</td>
+                        <th scope="row"> </th>
                         <td>(...)개의<br>검색결과</td>
                         <td>(...)개의<br>검색결과</td>
                     </tr>
                     <tr>
-                        <th scope="row">2 검색결과 나타내기</th>
+                        <th scope="row">검색결과</th>
                         <td>
-                            <div class="card" id="netflixcard" style="width: 240px;">
+                            <div class="card" id="netflixcard" style="width: 330px;">
                                 <img class="card-img-top" src="{{ url_for('static', filename='netflixlogo.png')}}" alt="콘텐츠 이미지">
                                 <div class="card-body">
                                 <h5 class="card-title">결과 없음</h5>
@@ -227,29 +222,19 @@
                             </div>              
                         </td>
                         <td>
-                            <div class="card" id="whachacard" style="width: 240px;">
+                            <div class="card" id="whachacard" style="width: 330px;">
                                 <img class="card-img-top" src="{{ url_for('static', filename='whachalogo.jpg')}}" alt="콘텐츠 이미지">
                                 <div class="card-body">
                                 <h5 class="card-title">결과 없음</h5>
-                                <a href="#" class="btn btn-primary btn_whacha">바로가기</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="card" id="tvingcard" style="width: 240px; ">
-                                <img class="card-img-top" src="{{ url_for('static', filename='tvinglogo.jpg')}}" alt="콘텐츠 이미지">
-                                <div class="card-body">
-                                <h5 class="card-title">결과 없음</h5>
-                                <a href="#" class="btn btn-primary btn_tving">바로가기</a>
+                                <a href="#" class="btn btn-primary btn_whacha" >바로가기</a>
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">etc</th>
-                        <td>넷플</td>
-                        <td>왓챠</td>
-                        <td>티빙</td>
+                        <th scope="row">사이트 바로가기</th>
+                        <td><a href="https://www.netflix.com/" target="blank" title="넷플릭스">넷플릭스</a></td>
+                        <td><a href="https://play.watcha.net/home" target="blank" title="왓챠플레이">왓챠플레이</a></td>
                     </tr>
                 </tbody>
             </table>
