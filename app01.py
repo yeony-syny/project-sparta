@@ -13,30 +13,30 @@ def home():
     return render_template('index.html')
 
 
+
+
+@app.route('/search', methods=['GET'])
+def search_list():
+    result = list(db.tvprogram.find({},{'_id':0}))
+
+    return jsonify({'result': 'success','msg':'연결됨'})
+
+
 @app.route('/search', methods=['POST'])
 def search_post():
-
     title_receive = request.form['title_give']
-    print(title_receive)
 
     return jsonify({'result': 'success','msg':'검색결과 보내기 연결'})
 
 
 
-@app.route('/search', methods=['GET'])
-def search_list():
-
-    result = list(db.tvprogram.find({},{'_id':0}))
-
-    return jsonify({'result': 'success','search_results':result})
-
-
-
-
-
-
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
+
+
+
+
+
 
     
     # 1. 클라이언트가 준 title 가져오기
