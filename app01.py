@@ -22,6 +22,9 @@ def search_list():
     return jsonify({'result': 'success','msg':'연결됨'})
 
 
+
+
+
 @app.route('/search', methods=['POST'])
 def search_post():
     title_receive = request.form['title_give']

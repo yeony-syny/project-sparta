@@ -17,7 +17,9 @@ def home():
 def search_post():
 
     title_receive = request.form['title_give']
-    print(title_receive)
+    ssresult = list(db.tvprogram.find({'title':title_receive}))
+
+    print(ssresult)
 
     return jsonify({'result': 'success','msg':'검색결과 보내기 연결'})
 
@@ -26,11 +28,9 @@ def search_post():
 @app.route('/search', methods=['GET'])
 def search_list():
 
-    result = list(db.tvprogram.find({},{'_id':0}))
+    sssresult = list(db.tvprogram.find({},{'_id':0}))
 
-    return jsonify({'result': 'success','search_results':result})
-
-
+    return jsonify({'result': 'success','search_results':sssresult})
 
 
 
