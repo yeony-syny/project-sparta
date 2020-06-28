@@ -47,18 +47,12 @@
 
     </style>
 
-    <script>
-               
-        // $(document).ready(function() {            
-        //     // $('#netflixcard').html('');
-        //     $('#netflixcard').empty();
-        //     $('#whachacard').empty();
-        //     alert('roading - - - !');
-        // });
+    <script>               
+        // $(document).ready(function() {
 
+        // };        
 
-
-         function find_btn() {
+        function find_btn() {
             // 1. input 에서 title 가져오기
             let title = $('#search_wordform').val();
             console.log(title)
@@ -68,17 +62,27 @@
                 alert('검색어를 입력해주세요!')
                 return false;
             }
-
+            
             $.ajax({
                 type: 'POST',
                 url:  '/search',
                 data: { title_give:title },
                 success: function (response) {
+
                     if (response['result'] == 'success') {
-                       
-                       let data = response['data'];
-                       console.log(data)
+
+                        let data = response['data'];
+                        console.log(data)
+                        console.log(data.length)
+                        
+                        if(data.length == 0){                        
+                            alert("검색 결과과 없습니다 !")
+                            return false
+                        }
+                                              
                        $('#netflixcard').empty()
+                       $('#netflix_num').empty()
+
                         for (let i = 0; i < data.length; i++) {
 
                             let tvpro = data[i];
@@ -96,10 +100,20 @@
                                             </div>`;
 
                             $('#netflixcard').append(temp_html);
+                            
+                            let length_num = data.length
+                            $('#netflix_num').empty();
+                            $('#netflix_num').append(length_num);
+                            
                         }
-                    } else { alert('검색결과 존재하지 않습니다.')}
+                    }
                 }
             });
+            $('#nsearchword').empty();
+            $('#nsearchword').append(title);
+            $('#wsearchword').empty();
+            $('#wsearchword').append(title);
+            $('#search_wordform').val('');
         }
 
         function show_list() {
@@ -134,11 +148,10 @@
 
                             $('#netflixcard').append(temp_html);
                         }
-                    } else { alert('검색결과 존재하지 않습니다.');}                            
+                    }                          
 			    }
 		    })
 		};
-
     </script>
 
 </head>
@@ -213,16 +226,16 @@
             <table class="table result_box">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col" style="width: 20%;">검색결과</th>
-                        <th scope="col" style="width: 40%;">Netflix</th>
-                        <th scope="col" style="width: 40%;">Whacha play</th>
+                        <th scope="col" style="width: 20%;">검색어</th>
+                        <th scope="col" style="width: 40%;" id="nsearchword">Netflix</th>
+                        <th scope="col" style="width: 40%;" id="wsearchword">Whacha play</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th scope="row"> </th>
-                        <td>(...)개의<br>검색결과</td>
-                        <td>(...)개의<br>검색결과</td>
+                        <td><p id="netflix_num" style="font-size: 20pt; font-style: inherit;"> (...) </p>개의 검색결과</td>
+                        <td><p id="whacha_num" style="font-size: 20pt; font-style: inherit;"> (...) </p>개의검색결과</td>
                     </tr>
                     <tr>
                         <th scope="row">검색결과</th>
