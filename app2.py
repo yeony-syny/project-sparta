@@ -23,9 +23,7 @@ def search_post():
 
     title_receive = request.form['title_give']
 
-    data = list(db.tvprogram.find({'title':{'$regex':title_receive}},{'_id':0}))
-
-    return jsonify({'result': 'success','data':data})
+    return jsonify({'result': 'success','target_title':title_receive})
 
 
 
